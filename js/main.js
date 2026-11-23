@@ -5,6 +5,27 @@ document.addEventListener('DOMContentLoaded', function () {
   if (toggle && links) {
     toggle.addEventListener('click', function () { links.classList.toggle('open'); });
   }
+  // Shared footer contact address
+  var connectLists = document.querySelectorAll('footer .footer-grid > div');
+  connectLists.forEach(function (column) {
+    var heading = column.querySelector('h4');
+    var list = column.querySelector('ul');
+    if (heading && heading.textContent.trim() === 'Connect' && list &&
+        !list.querySelector('a[href="mailto:rahul.chatterjee@sansparshgrs.com"]')) {
+      var item = document.createElement('li');
+      var link = document.createElement('a');
+      link.href = 'mailto:rahul.chatterjee@sansparshgrs.com';
+      link.textContent = 'rahul.chatterjee@sansparshgrs.com';
+      link.style.overflowWrap = 'anywhere';
+      item.appendChild(link);
+      var gmail = list.querySelector('a[href="mailto:chatts555@gmail.com"]');
+      if (gmail) {
+        gmail.parentElement.insertAdjacentElement('afterend', item);
+      } else {
+        list.appendChild(item);
+      }
+    }
+  });
   // Footer year
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
